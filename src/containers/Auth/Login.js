@@ -7,7 +7,35 @@ import "./Login.scss";
 class Login extends Component {
     constructor(props) {
         super(props);
+        //state là trạng thái cập nhật value khi value thay dổi
+        this.state = {
+            username: "",
+            password: "",
+            isShowPassWord: false,
+        };
     }
+
+    handleOnChangeUsername = (event) => {
+        // nên dùng kiểu gọi như này
+        this.setState({
+            username: event.target.value,
+        });
+        console.log(this.state.username);
+    };
+    handleOnChangePassword = (event) => {
+        // nên dùng kiểu gọi như này
+        this.setState({
+            password: event.target.value,
+        });
+        console.log(this.state.password);
+    };
+    changeTogglePassword() {
+        this.setState({
+            isShowPassWord: !this.state.isShowPassWord,
+        });
+    }
+    handleLogin() {}
+
     render() {
         //Viết theo jsx
         return (
@@ -16,23 +44,52 @@ class Login extends Component {
                     <div className="login-content row">
                         <div className="col-12 login-text">Login</div>
                         <div className="col-12 form-group login-input">
-                            <label>UserName</label>
+                            <label>UserName:</label>
                             <input
                                 type="text"
                                 className="form-control"
                                 placeholder="Enter your Username"
+                                value={this.state.username}
+                                onChange={(event) =>
+                                    this.handleOnChangeUsername(event)
+                                }
                             />
                         </div>
                         <div className="col-12 form-group login-input">
-                            <label>Password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                placeholder="Enter your password"
-                            />
+                            <label>Password:</label>
+                            <div className="custom-input-password">
+                                <input
+                                    type={
+                                        this.state.isShowPassWord
+                                            ? "text"
+                                            : "password"
+                                    }
+                                    className="form-control"
+                                    placeholder="Enter your password"
+                                    onChange={(event) =>
+                                        this.handleOnChangePassword(event)
+                                    }
+                                />
+                                <span
+                                    onClick={() => this.changeTogglePassword()}
+                                >
+                                    <i
+                                        className={
+                                            this.state.isShowPassWord
+                                                ? "far fa-eye-slash"
+                                                : "far fa-eye"
+                                        }
+                                    ></i>
+                                </span>
+                            </div>
                         </div>
                         <div className="col-12">
-                            <button className=" btn-login">Login</button>
+                            <button
+                                className=" btn-login"
+                                onClick={() => this.handleLogin()}
+                            >
+                                Login
+                            </button>
                         </div>
                         <div className="col-12">
                             <span className="forgot-password">
