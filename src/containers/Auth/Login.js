@@ -22,6 +22,7 @@ class Login extends Component {
         });
         console.log(this.state.username);
     };
+
     handleOnChangePassword = (event) => {
         // nên dùng kiểu gọi như này
         this.setState({
@@ -29,11 +30,13 @@ class Login extends Component {
         });
         console.log(this.state.password);
     };
+
     changeTogglePassword() {
         this.setState({
             isShowPassWord: !this.state.isShowPassWord,
         });
     }
+
     handleLogin() {}
 
     render() {
